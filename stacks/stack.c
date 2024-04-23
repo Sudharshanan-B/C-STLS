@@ -30,6 +30,7 @@ stack* initialize_stack(size_t data_size) {
     }
     stack_var->top_element = NULL;
     stack_var->data_size = data_size;
+    stack_var->size = 0;
     return stack_var;
 }
 
@@ -39,11 +40,17 @@ int is_empty(void* var) {
     return stack_var->top_element == NULL;
 }
 
+int size(void *var) {
+    stack *stack_var = (stack *)(var);
+    return stack_var->size;
+}
+
 // Function to push an element onto the stack
 void push(void* var, void* data) {
     stack *stack_var = (stack *)(var);
     StackNode* new_node = create_node(data, stack_var->data_size);
     new_node->next = stack_var->top_element;
+    stack_var->size++;
     stack_var->top_element = new_node;
 }
 
@@ -56,6 +63,7 @@ void pop(void* var) {
     }
     StackNode* temp = stack_var->top_element;
     stack_var->top_element = temp->next;
+    stack_var->size--;
     free(temp->data);
     free(temp);
 }

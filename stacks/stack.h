@@ -13,6 +13,7 @@ typedef struct StackNode {
 typedef struct {
     StackNode* top_element;
     size_t data_size; // Size of the data type
+    int size;
 } stack;
 
 stack* initialize_stack(size_t data_size);
